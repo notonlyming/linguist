@@ -1,0 +1,157 @@
+h1,h2,h3,h4,h5,h6 {
+    font-family: Arial, Helvetica, 'Noto Sans CJK SC';
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 2rem;
+    width: fit-content;
+    color: hsl(242, 63%, 20%);
+    padding: 0 0.5rem;
+    margin: 0;
+}
+
+nav {
+    display: block;
+    float: right;
+    position: sticky;
+    background-color: white;
+    width: 12rem;
+    line-height: 1.2rem;
+    font-size: 0.8rem;
+    top: 10px;
+    border-left: 6px solid hsl(242, 63%, 20%);
+}
+
+.page h1:hover,h2:hover,h3:hover,h4:hover,h5:hover,h6:hover,.box:hover,.wordbox:hover,nav li a:hover {
+    border : 1px solid hsl(241, 28%, 29%);
+    transform: scale(1.05);
+    background-color: white;
+    box-shadow: 5px 5px 5px 5px hsl(242, 20%, 80%);
+    font-weight: 700;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    margin: 0rem 0rem 1rem 0rem;
+}
+
+header h1 {
+    font-size: 1.5rem;
+}
+
+header h1:hover {
+    border: none;
+    transform: none;
+    background-color: none;
+    box-shadow: none;
+    font-weight: none;
+}
+
+nav li a{
+    text-decoration: none;
+    color: hsl(242, 63%, 20%);
+}
+
+ul {
+    font-family: Arial, Helvetica, 'Noto Sans CJK SC';
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 1rem;
+}
+li ul{
+    padding: 0 0 0 1rem;
+}
+
+h1,h2,h3,h4,h5,h6,.box,.wordbox,nav li a {
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+html {
+    font-size: 26px;
+    scroll-behavior: smooth;
+}
+
+.sc {
+    font-family: 'Noto Serif CJK SC';
+}
+.tc {
+    font-family: 'Noto Serif CJK TC';
+}
+.hk {
+    font-family: 'Noto Serif CJK HK';
+}
+.jp {
+    font-family: 'Noto Serif CJK JP';
+}
+.en{
+    font-family: 'Times New Roman';
+}
+
+em {
+    color: hsl(242, 40%, 35%);
+    font-weight: inherit;
+    font-style: normal;
+}
+
+.exampleshow {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.explain {
+    font-size: 0.8rem;
+    line-height: 1rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 4rem;
+    width: fit-content;
+    padding: 0 0.5rem;
+    transform: scale(1);
+}
+
+.wordbox {
+    display: inline-flex;
+    width: fit-content;
+    height: 4rem;
+    color: #343280;
+    font-weight: normal;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.5rem;
+    margin: 0;
+}
+
+p {
+    line-height: 1rem;
+    margin: 0;
+}
+
+rt {
+    font-family: Arial, Helvetica;
+    font-size: 0.6ex;
+}
+
+body {
+    max-width: 35rem;
+    min-width: 35rem;
+    margin: 1rem auto;
+    padding: 2rem 2rem;
+    background-color: white;
+    box-shadow: 9px 9px 9px 9px hsl(242, 20%, 80%);
+}
+
+div.page {
+    margin: 0rem 12rem 0rem 0rem;
+}
