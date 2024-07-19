@@ -2,19 +2,43 @@
 <html id="0">
 
 <head>
-    <title>Linguist Guid</title>
+    <title>Linguist Guide</title>
     <link rel="stylesheet" type="text/css" href="main.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <link rel="shortcut icon" href="favicon.png" />
     <link rel="bookmark" href="favicon.png" type="image/x-icon"　/>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+HK:wght@200..900&family=Noto+Serif+JP:wght@200..900&family=Noto+Serif+SC:wght@200..900&family=Noto+Serif+TC:wght@200..900&display=swap');
-    </style>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Sans+TC:wght@100..900&family=Noto+Serif+HK:wght@200..900&family=Noto+Serif+JP:wght@200..900&family=Noto+Serif+SC:wght@200..900&family=Noto+Serif+TC:wght@200..900&display=swap'); </style>
+    <script type="text/javascript">
+        function appendOnclickForRt(){
+            const rts = document.getElementsByTagName('rt');
+            for(const element of rts){
+                if(element.innerText != ""){
+                        element.addEventListener('click', () => playAudios(element.innerText.split(" ")), false);
+                }
+            }
+        }
+
+        function playAudios(names) {
+                console.log("Clicked " + names);
+
+                function playNext() {
+                    var currentName = names.shift();
+                    var audio = new Audio("audio/${currentName}.mp3")
+                    audio.play();
+                    audio.addEventListener('ended', () => {
+                        if (names.length > 0) {
+                            playNext()
+                        }
+                    });
+                }
+            }
+    </script>
 </head>
 
-<body>
-    <header id="0.1">
-        <h1 class="en">Linguist Guid</h1>
+<body onload="appendOnclickForRt()">
+    <header>
+        <h1 class="en" id="0.1">Linguist Guide</h1>
     </header>
         <nav>
             <ul>
@@ -29,11 +53,11 @@
             </ul>
         </nav>
         <div class="page">
-            <section id="1">
-                <h1>粤语</h1>
+            <section>
+                <h1 id="1">粤语</h1>
 
-                <section id="1.1">
-                    <h2>在喝早茶时点餐和询问价格</h2>
+                <section>
+                    <h2 id="1.1">在喝早茶时点餐和询问价格</h2>
                     <div class="box">
                         <ruby class="hk exampleshow">
                             請<rt>ceng2</rt>問<rt>man6</rt>呢<rt>ni1</rt>個<rt>go3</rt>係<rt>hai6</rt>乜<rt>mat1</rt>嘢<rt>je5
@@ -173,8 +197,8 @@
                         </ruby>
                     </div>
                 </section>
-                <section id="1.2">
-                    <h2>初次见面与人寒暄</h2>
+                <section>
+                    <h2 id="1.2">初次见面与人寒暄</h2>
                     <div class="box">
                         <ruby class="hk exampleshow">
                             你<rt>nei5</rt>好<rt>hou2</rt>，<rt> </rt>請<rt>ceng2</rt>問<rt>man6</rt>點<rt>dim2</rt>稱<rt>cing1
@@ -354,8 +378,8 @@
                     </div>
                 </section>
             </section>
-            <section id="2">
-                <h1>日语</h1>
+            <section>
+                <h1 id="2">日语</h1>
             </section>
         </div>
 </body>

@@ -1,5 +1,5 @@
 h1,h2,h3,h4,h5,h6 {
-    font-family: Arial, Helvetica, 'Noto Sans CJK SC';
+    font-family: 'Noto Sans SC', sans-serif;
     font-weight: 600;
     font-size: 1rem;
     line-height: 2rem;
@@ -29,6 +29,18 @@ nav {
     font-weight: 700;
 }
 
+rt {
+    content: var();
+}
+
+rt:hover {
+    border : 1px solid hsl(241, 28%, 29%);
+    border-radius: 5px;
+    transform: scale(2);
+    background-color: white;
+    font-weight: 700;
+}
+
 header {
     display: flex;
     justify-content: center;
@@ -47,13 +59,13 @@ header h1:hover {
     font-weight: none;
 }
 
-nav li a{
+nav li a, a{
     text-decoration: none;
     color: hsl(242, 63%, 20%);
 }
 
 ul {
-    font-family: Arial, Helvetica, 'Noto Sans CJK SC';
+    font-family: 'Noto Sans SC', sans-serif;
     list-style: none;
     margin: 0;
     padding: 0 0 0 1rem;
@@ -74,16 +86,16 @@ html {
 }
 
 .sc {
-    font-family: 'Noto Serif CJK SC';
+    font-family: 'Noto Serif SC';
 }
 .tc {
-    font-family: 'Noto Serif CJK TC';
+    font-family: 'Noto Serif TC';
 }
 .hk {
-    font-family: 'Noto Serif CJK HK';
+    font-family: 'Noto Serif HK';
 }
 .jp {
-    font-family: 'Noto Serif CJK JP';
+    font-family: 'Noto Serif JP';
 }
 .en{
     font-family: 'Times New Roman';
