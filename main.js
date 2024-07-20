@@ -1,7 +1,7 @@
 
 function appendOnclick() {
     // 获取所有粤语rt
-    const rts = document.getElementById('jyut6jyu2').getElementsByTagName('rt');
+    const rts = document.getElementById('1').getElementsByTagName('rt');
     // 为粤语拼音rt监听事件并调用播放音频
     for (const element of rts) {
         if (element.innerText != "") {
@@ -13,7 +13,7 @@ function appendOnclick() {
     }
 
     // 为所有粤语展示句子添加连续播放音频功能
-    var rubys = document.getElementById('jyut6jyu2').getElementsByClassName('exampleshow');
+    var rubys = document.getElementById('1').getElementsByClassName('exampleshow');
     for (var element of rubys) {
         var allRtTag = element.getElementsByTagName('rt');
         var allNames = [];
