@@ -37,10 +37,10 @@ function appendOnclick() {
 
     // 为所有粤语展示句子添加连续播放音频功能
     var rubys = document.getElementById(jyutSectionId).getElementsByClassName('exampleshow');
-    for (var element of rubys) {
-        element.addEventListener('click', (event) => {
+    for (const element of rubys) {
+        element.parentElement.addEventListener('click', (event) => {
             event.stopPropagation();
-            playNameAudios(getPinyinsOfRtsInRuby(event.target));
+            playNameAudios(getPinyinsOfRtsInRuby(element));
         });
     }
 }

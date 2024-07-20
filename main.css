@@ -119,6 +119,7 @@ em {
 }
 
 .box {
+    cursor: url("play.svg"), pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -130,6 +131,7 @@ em {
 
 .wordbox {
     display: inline-flex;
+    cursor: url("play.svg"), pointer;
     width: fit-content;
     height: 4rem;
     color: #343280;
