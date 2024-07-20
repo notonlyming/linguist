@@ -26,11 +26,7 @@ nav {
     transform: scale(1.05);
     background-color: white;
     box-shadow: 5px 5px 5px 5px hsl(242, 20%, 80%);
-    font-weight: 700;
-}
-
-rt {
-    content: var();
+    font-weight: 900;
 }
 
 rt:hover {
@@ -38,7 +34,6 @@ rt:hover {
     border-radius: 5px;
     transform: scale(2);
     background-color: white;
-    font-weight: 700;
 }
 
 header {
@@ -110,6 +105,7 @@ em {
 .exampleshow {
     font-size: 1.5rem;
     line-height: 1.5rem;
+    font-weight: inherit;
 }
 
 .explain {
@@ -126,9 +122,9 @@ em {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 4rem;
+    height: fit-content;
     width: fit-content;
-    padding: 0 0.5rem;
+    padding: 0.5rem 0.5rem;
     transform: scale(1);
 }
 
@@ -153,6 +149,7 @@ p {
 rt {
     font-family: Arial, Helvetica;
     font-size: 0.6ex;
+    margin-bottom: 0;
 }
 
 body {
