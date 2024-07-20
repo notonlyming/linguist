@@ -21,7 +21,7 @@ nav {
     border-left: 6px solid hsl(242, 63%, 20%);
 }
 
-.page h1:hover,h2:hover,h3:hover,h4:hover,h5:hover,h6:hover,.box:hover,.wordbox:hover,nav li a:hover,h1:target,h2:target {
+.box:hover, .wordbox:hover, nav li a:hover, .onHover {
     border : 1px solid hsl(241, 28%, 29%);
     transform: scale(1.05);
     background-color: white;
