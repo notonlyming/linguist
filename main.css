@@ -38,6 +38,7 @@ rt:hover, .rtHighLight {
     border-radius: 5px;
     transform: scale(2);
     background-color: white;
+    font-weight: 900;
 }
 
 header {
@@ -156,6 +157,8 @@ rt {
     font-family: Arial, Helvetica;
     font-size: 0.6ex;
     margin-bottom: 0;
+    transition: all 0.1s ease-in-out;
+    font-weight: 500;
 }
 
 body {
