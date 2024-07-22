@@ -4,22 +4,9 @@ function appendOnclick() {
     var aTagElements = document.getElementsByTagName('nav')[0].getElementsByTagName('a');
     for (var element of aTagElements) {
         element.addEventListener('click', (event) => {
-            var thisHref = event.target.getAttribute('data-linkto');
-            var headlineEle = document.getElementById(thisHref);
-            var originClass = headlineEle.className.split(' ');
-            if (thisHref!='0'){
-                headlineEle.className = originClass.concat('onHover').join(' ');
-                headlineEle.scrollIntoView({behavior: "smooth", block: "nearest", inline: "start"});
-                setTimeout(() => {
-                    headlineEle.className = originClass;
-                }, 1000);
-            }
-            var eleRect = headlineEle.getBoundingClientRect();
-            var bodyRect = document.body.getBoundingClientRect();
-            window.scroll({top:eleRect.top - bodyRect.top, left:eleRect.left - bodyRect, behavior:"smooth"});
+            titleOfContentClick(event.target);
         });
     }
-    
 
     // 为所有粤语rt添加播放事件
     const jyutSectionId = 'jyut6jyu2'
@@ -45,7 +32,35 @@ function appendOnclick() {
     }
 }
 
-// 传入一个ruby元素，返回其内所有非空拼音的数组
+// 设置元素高亮
+function setElementHightLightStatus(elementToSet, status) {
+    var originClass = elementToSet.className.split(' ');
+    if(status){
+        elementToSet.className = originClass.concat('onHover').join(' ');
+    } else {
+        elementToSet.className = originClass.filter(item => item!="onHover").join(' ');
+    }
+}
+
+// 定义了目录标题被点击后会做的事情（滚动并高亮对应标题）
+function titleOfContentClick(clickedLi) {
+    var thisHref = clickedLi.getAttribute('data-linkto');
+    var headlineEle = document.getElementById(thisHref);
+    if (thisHref){
+        var eleRect = headlineEle.getBoundingClientRect();
+        var bodyRect = document.body.getBoundingClientRect();
+        // 滚动到标题所在处
+        window.scroll({top:eleRect.top - bodyRect.top, left:eleRect.left - bodyRect, behavior:"smooth"});
+
+        // 高亮标题一秒
+        setElementHightLightStatus(headlineEle, true);
+        setTimeout(() => {
+            setElementHightLightStatus(headlineEle, false);
+        }, 1000);
+    }
+}
+
+// 传入一个ruby元素，返回可播放的非空拼音的数组
 function getPinyinsOfRtsInRuby(aRuby) {
     var allRtTag = aRuby.getElementsByTagName('rt');
     var allNames = [];
@@ -58,18 +73,22 @@ function getPinyinsOfRtsInRuby(aRuby) {
 }
 
 // 对传入的数组播放音频
-function playNameAudios(names) {
+function playNameAudios(names, rts) {
     console.log("Clicked " + names);
-    var nameList = names.slice();
-    playNext();
+    // 生成audio数组
+    var audioList = Array();
+    for(i=0; i<names.length; i++) {
+        audioList.push(new Audio(`low/${names[i]}.wav`));
+        audioList[i].load();
+    }
 
+    playNext();
     function playNext() {
-        var currentName = nameList.shift();
-        var audio = new Audio(`low/${currentName}.wav`)
-        audio.play();
-        audio.addEventListener('ended', () => {
-            if (nameList.length > 0) {
-                playNext()
+        var currentAudio = audioList.shift();
+        currentAudio.play();
+        currentAudio.addEventListener('ended', () => {
+            if (audioList.length > 0) {
+                playNext();
             }
         });
     }
