@@ -25,7 +25,7 @@ nav li a{
     cursor: default;
 }
 
-.box:hover, .wordbox:hover, nav li a:hover, .onHover {
+.box:hover, .wordbox:hover, nav li a:hover, .highLight {
     border : 1px solid hsl(241, 28%, 29%);
     transform: scale(1.05);
     background-color: white;
@@ -33,7 +33,7 @@ nav li a{
     font-weight: 900;
 }
 
-rt:hover {
+rt:hover, .rtHighLight {
     border : 1px solid hsl(241, 28%, 29%);
     border-radius: 5px;
     transform: scale(2);

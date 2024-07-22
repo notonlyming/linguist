@@ -17,6 +17,7 @@ function appendOnclick() {
         if (element.innerText != "") {
             element.addEventListener('click', (event) => {
                 event.stopPropagation();
+                // todo
                 playNameAudios(event.target.innerText.split(" "));
             });
         }
@@ -27,18 +28,18 @@ function appendOnclick() {
     for (const element of rubys) {
         element.parentElement.addEventListener('click', (event) => {
             event.stopPropagation();
-            playNameAudios(getPinyinsOfRtsInRuby(element));
+            playNameAudios(getPinyinAndRtMapListInRuby(element));
         });
     }
 }
 
 // 设置元素高亮
-function setElementHightLightStatus(elementToSet, status) {
+function setElementHightLightStatus(elementToSet, className, status) {
     var originClass = elementToSet.className.split(' ');
     if(status){
-        elementToSet.className = originClass.concat('onHover').join(' ');
+        elementToSet.className = originClass.concat(className).join(' ');
     } else {
-        elementToSet.className = originClass.filter(item => item!="onHover").join(' ');
+        elementToSet.className = originClass.filter(item => item!=className).join(' ');
     }
 }
 
@@ -53,41 +54,64 @@ function titleOfContentClick(clickedLi) {
         window.scroll({top:eleRect.top - bodyRect.top, left:eleRect.left - bodyRect, behavior:"smooth"});
 
         // 高亮标题一秒
-        setElementHightLightStatus(headlineEle, true);
+        setElementHightLightStatus(headlineEle, 'highLight', true);
         setTimeout(() => {
-            setElementHightLightStatus(headlineEle, false);
+            setElementHightLightStatus(headlineEle, 'highLight', false);
         }, 1000);
     }
 }
 
-// 传入一个ruby元素，返回可播放的非空拼音的数组
-function getPinyinsOfRtsInRuby(aRuby) {
-    var allRtTag = aRuby.getElementsByTagName('rt');
-    var allNames = [];
-    for (i = 0; i < allRtTag.length; i++) {
-        if (aRuby.innerText != "") {
-            allNames = allNames.concat(allRtTag[i].innerText.split(' '));
+// 获取单个Rt的拼音和rt的MapList
+function getPinyinAndRtMapListInRt(aRt) {
+    var pinyinAndRtMapList = [];
+    // 如果rt为空，则不加入待发声的数组
+    if (aRt.innerText != "") {
+        // 对每个拼音都分配同一个rt的数据结构，处理一个rt有多个拼音的情况，方便播放函数高亮
+        let pinyins = aRt.innerText.split(' ');
+        for(j=0; j<pinyins.length; j++) {
+            pinyinAndRtMapList.push(new Map([
+                ['pinyin', pinyins[j]],
+                ['rt', aRt]
+            ]));
         }
     }
-    return allNames.filter(name => (name != ''));
+    return pinyinAndRtMapList;
+}
+
+// 传入一个ruby元素，返回可播放的非空拼音的数组
+function getPinyinAndRtMapListInRuby(aRuby) {
+    var allRtTag = aRuby.getElementsByTagName('rt');
+    var allPinyinAndRtMapList = [];
+    // 遍历每一rt的拼音生成数据结构
+    for (i = 0; i < allRtTag.length; i++) {
+        allPinyinAndRtMapList = allPinyinAndRtMapList.concat(
+            getPinyinAndRtMapListInRt(allRtTag[i])
+        );
+    }
+    return allPinyinAndRtMapList;
 }
 
 // 对传入的数组播放音频
-function playNameAudios(names, rts) {
-    console.log("Clicked " + names);
-    // 生成audio数组
-    var audioList = Array();
-    for(i=0; i<names.length; i++) {
-        audioList.push(new Audio(`low/${names[i]}.wav`));
-        audioList[i].load();
+function playNameAudios(pinyinAndRtList) {
+    // 对list里的每个map生成audio对象
+    var pinyinAndRtAndAudioList = pinyinAndRtList.slice();
+    for(i=0; i<pinyinAndRtAndAudioList.length; i++) {
+        pinyinAndRtAndAudioList[i].set(
+            'audio', 
+            new Audio(`low/${pinyinAndRtAndAudioList[i].get('pinyin')}.wav`)
+        );
+        pinyinAndRtAndAudioList[i].get('audio').load();
     }
 
     playNext();
     function playNext() {
-        var currentAudio = audioList.shift();
-        currentAudio.play();
-        currentAudio.addEventListener('ended', () => {
-            if (audioList.length > 0) {
+        // 取出一个map
+        var currentMap = pinyinAndRtAndAudioList.shift();
+        setElementHightLightStatus(currentMap.get('rt'), 'rtHighLight', true);
+        currentMap.get('audio').play();
+        currentMap.get('audio').addEventListener('ended', () => {
+            setElementHightLightStatus(currentMap.get('rt'), 'rtHighLight', false);
+            if (pinyinAndRtAndAudioList.length > 0) {
                 playNext();
             }
         });
