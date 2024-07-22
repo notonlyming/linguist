@@ -17,8 +17,7 @@ function appendOnclick() {
         if (element.innerText != "") {
             element.addEventListener('click', (event) => {
                 event.stopPropagation();
-                // todo
-                playNameAudios(event.target.innerText.split(" "));
+                playNameAudios(getPinyinAndRtMapListInRt(event.target));
             });
         }
     }
